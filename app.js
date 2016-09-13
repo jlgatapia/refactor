@@ -1,52 +1,42 @@
 $(document).ready(function() {
 
-	$('.btn_play').on('click', doFizzBuzz);
-	doFizzBuzz();
+  $('.btn_play').on('click', doFizzBuzz);
 
-	function doFizzBuzz() {
-		clearRoot();
-		var result = window.prompt('number 1 to 100 here');
-		
-		if (result < 1 || result > 100) {
-			return alert('Only 1 to 100 value');
-		} 
+  doFizzBuzz();
 
-		if (isNaN(result)) {
-			return alert('That is not a number!');
-		}
+  function doFizzBuzz() {
+    $('#root').html('');
+    var maxValue = parseInt(prompt('number 1 to 100 here'));
 
-		oneToSomething(result, function(i) {
-			var output = getFizzBuzz(i);
-			appendToRoot(output);
-		});
-	}
+    // Validate input
+    if (maxValue < 1 || maxValue > 100) {
+      return alert('Only 1 to 100 value');
+    } 
+    if (isNaN(maxValue)) {
+      return alert('That is not a number!');
+    }
+    oneToSomething(maxValue);
+  }
 });
 
-function oneToSomething(count, fn) {
-	for (var i = 1; i <= count; i++) {
-		fn(i);
-	}
+function oneToSomething(count) {
+  for (var i = 1; i <= count; i++) {
+    var output = getFizzBuzz(i);
+    $('#root').append('<div class="content">' + output + '</div>');
+  }
 }
 
 function getFizzBuzz(num) {
-	if (num % 3 === 0 && num % 5 === 0) {
-		return 'fizzbuzz';
-	}
-	else if (num % 3 === 0) {
-		return 'fizz';
-	}
-	else if (num % 5 === 0) {
-		return 'buzz';
-	}
-	else {
-		return num;
-	}
-}
-
-function appendToRoot(content) {
-	$('#root').append('<div class="content">' + content + '</div>');
-}
-
-function clearRoot() {
-	$('#root').html('');
+  if (num % 3 === 0 && num % 5 === 0) {
+    return 'fizzbuzz';
+  }
+  else if (num % 3 === 0) {
+    return 'fizz';
+  }
+  else if (num % 5 === 0) {
+    return 'buzz';
+  }
+  else {
+    return num;
+  }
 }
